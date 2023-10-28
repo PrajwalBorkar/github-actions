@@ -1,13 +1,20 @@
 name: First workflow
 
-on: push 
+on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v3 # checkout the repository
+    - name: Use Node
+    
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Install Dependencies
+      run: npm install
 
-    - name: Run a simple github action
-      run: echo "this workflow run successfully"
+    - name: Run Test
+      run: npm test
